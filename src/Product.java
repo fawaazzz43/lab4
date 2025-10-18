@@ -15,7 +15,7 @@ public class Product{
         this.price = price;
     }
 
-    public int getQuantity(){
+    public int getQuantity(String product_id){
         return this.quantity;
     }
 
@@ -25,6 +25,10 @@ public class Product{
             this.quantity = quantity;
         else
             System.out.println("Error: quantity must be non-negative.");
+    }
+
+    public float getPrice() {
+        return price;
     }
 
     public String lineRepresentation()

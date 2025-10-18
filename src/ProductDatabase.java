@@ -44,7 +44,7 @@ public class ProductDatabase  {
         return records;
     }
 
-    public boolean contains(String key )
+    public boolean contains(String key)
     {
         for(int i=0;i<records.size();i++)
             if(key.equals(records.get(i).getSearchKey()))
@@ -78,11 +78,18 @@ public class ProductDatabase  {
 
     public void saveToFile() throws IOException
     {
-        FileWriter fr = new FileWriter(filename);
-        for(int i=0;i<records.size();i++)
-            fr.write(records.get(i).lineRepresentation()+"\n");
+        try
+        {
+            FileWriter fr = new FileWriter(filename);
+            for(int i=0;i<records.size();i++)
+                fr.write(records.get(i).lineRepresentation()+"\n");
 
-        fr.close();
+            fr.close();
+        }
+        catch(IOException e)
+        {
+            System.out.println("Error while saving file: " + e.getMessage());
+        }
     }
 
 }

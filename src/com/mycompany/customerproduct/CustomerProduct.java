@@ -7,10 +7,6 @@ package com.mycompany.customerproduct;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-/**
- *
- * @author pc
- */
 public class CustomerProduct {
 
     private String customerSSN;
@@ -78,9 +74,5 @@ public class CustomerProduct {
        
        return searchKey;
     
-    }
-    
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
     }
 }
