@@ -1,8 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
-package com.mycompany.customerproduct;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
