@@ -75,19 +75,38 @@ public class EmployeeUserDatabase {
     public void insertRecord(EmployeeUser record)
     {
        this.records.add(record);
+        try
+        {
+            saveToFile();
+        }
+        catch (Exception e)
+        {
+            throw new RuntimeException(e);
+        }
     }
     public void deleteRecord(String key)
     {
+        int flag = 0 ;
         for(int i=0;i<records.size();i++)
         {
             if(records.get(i).getSearchKey().equals(key))
             {
                 records.remove(i);
-                return;
+                flag = 1 ;
             }
-            
         }
-        System.out.println("Record not found.");
+        if (flag == 0)
+        {
+            System.out.println("Record not found.");
+        }
+        else
+        {
+            try {
+                saveToFile();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
     public void saveToFile() throws Exception
     {

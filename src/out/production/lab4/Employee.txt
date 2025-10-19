@@ -1,0 +1,6 @@
+E1200,Ahmed,ahmed_1999@gmail.com,Alexandria,01088877345
+E1201,Mohamed,mohamed_2000@gmail.com,Cairo,01012345678
+E1202,Sara,sara_2001@gmail.com,Giza,01098765432
+E1203,Layla,layla_2002@gmail.com,Alexandria,01055555555
+E1204,Omar,omar_2003@gmail.com,Cairo,01044444444
+E1206,Youssef,youssef_2005@gmail.com,Alexandria,01022222222

@@ -1,4 +1,4 @@
-import com.mycompany.customerproduct.CustomerProduct;
+
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -16,9 +16,9 @@ public class employee_role
         this.PD = PD ;
         this.CPD = CPD ;
     }
-    public void add_product (String product_id, String product_name, String manufacturer_name, String supplier_name, int quantity)
+    public void add_product (String product_id, String product_name, String manufacturer_name, String supplier_name, int quantity, Double price )
     {
-        String line = product_id + "," + product_name + "," + manufacturer_name + "," + supplier_name + "," + quantity ;
+        String line = product_id + "," + product_name + "," + manufacturer_name + "," + supplier_name + "," + quantity + "," + price ;
 
         Product p ;
         p = PD.createRecordFrom (line) ;
@@ -52,13 +52,7 @@ public class employee_role
         {
             CPD.insertRecord(u) ;
             p.setQuantity( p.getQuantity(product_id)-1 );
-            try
-            {
-                PD.saveToFile();
-            } catch (IOException e)
-            {
-                throw new RuntimeException(e);
-            }
+            PD.saveToFile();
             return true;
         }
     }
@@ -90,20 +84,14 @@ public class employee_role
 
                   PD.deleteRecord(product_id) ;
 
-                  try
-                  {
-                      PD.saveToFile();
-                  } catch (IOException e)
-                  {
-                      throw new RuntimeException(e);
-                  }
+                  PD.saveToFile();
 
                   return p.getPrice() ;
               }
           }
     }
 
-    public boolean apply_payment(String customer_ssn , LocalDate purchase_date) throws IOException
+    public boolean apply_payment(String customer_ssn , LocalDate purchase_date)
     {
         int flag = 0 ;
         for ( CustomerProduct i : CPD.returnAllRecords() )
@@ -129,7 +117,7 @@ public class employee_role
         }
     }
 
-    public void logout () throws IOException
+    public void logout ()
     {
         CPD.saveToFile();
         PD.saveToFile();

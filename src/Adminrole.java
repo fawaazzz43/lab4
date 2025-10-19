@@ -1,13 +1,21 @@
 public class Adminrole {
     private EmployeeUserDatabase database;
 
-  public Adminrole(String filename) throws Exception {
-    this.database = new EmployeeUserDatabase(filename);
-    this.database.readFromFile();
+  public Adminrole(String filename)
+  {
+      try
+      {
+          this.database = new EmployeeUserDatabase(filename);
+          this.database.readFromFile();
+      }
+      catch (Exception e)
+      {
+          System.out.println("error reading file");
+      }
 }
 
 
-    public void addEmployee(String employeeId, String name, String position, String department, String email)
+    public void addEmployee(String employeeId, String name, String email, String address, String phoneNumber)
     {
        if(database.contains(employeeId))
        {
@@ -15,7 +23,7 @@ public class Adminrole {
            return;
        }
     
-        EmployeeUser newEmployee = new EmployeeUser(employeeId, name, position, department, email);
+        EmployeeUser newEmployee = new EmployeeUser(employeeId, name, email, address, phoneNumber);
         this.database.insertRecord(newEmployee);
         System.out.println("New employee added.");
         
@@ -40,10 +48,18 @@ public class Adminrole {
         return employees;
 
     }
-    public void logout() throws Exception
+    public void logout()
     {
-        database.saveToFile();
-        System.out.println("Admin logged out and data saved.");
+        try
+        {
+            database.saveToFile();
+            System.out.println("Admin logged out and data saved.");
+        }
+        catch (Exception e)
+        {
+            System.out.println("error saving file");
+        }
+
     }
 
 }

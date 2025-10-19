@@ -1,8 +1,6 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 public class ProductDatabase  {
@@ -16,21 +14,28 @@ public class ProductDatabase  {
         records=new ArrayList();
     }
 
-    public void readFromFile() throws IOException
+    public void readFromFile()
     {
-        FileReader fr = new FileReader(filename);
-        BufferedReader br = new BufferedReader(fr);
-        String line = br.readLine();
-        records.clear();
-        while (line != null)
-        {
-        
-        records.add(createRecordFrom(line));
-        line = br.readLine();
-
+        File file = new File(filename);
+        if (!file.exists()) {
+            System.out.println("File not found!");
+            return;
         }
-        br.close();
-        System.out.println("File is readed successfully");
+        try
+        {
+            Scanner input = new Scanner(file);
+            while (input.hasNextLine()) {
+                String line = input.nextLine();
+                Product p = createRecordFrom(line);
+                if (p != null) records.add(p);
+            }
+            input.close();
+        }
+        catch (FileNotFoundException e)
+        {
+            System.out.println("File not found!");
+        }
+
     }
 
     public Product createRecordFrom(String line)
@@ -63,20 +68,28 @@ public class ProductDatabase  {
     public void insertRecord(Product record)
     {
         if(contains(record.getSearchKey())==false)
-            records.add(record);
+        {
+            this.records.add(record);
+            saveToFile();
+        }
         else
+        {
             System.out.println("Product ID must be unique");
+        }
     }
 
     public void deleteRecord(String key)
     {
-        int i=0;
-        for(i=0;i<records.size();i++)
+        int i = 0 ;
+        for( i = 0 ; i < records.size() ; i++ )
+        {
             if(key.equals(records.get(i).getSearchKey()))
                 records.remove(records.get(i));
+                saveToFile();
+        }
     }
 
-    public void saveToFile() throws IOException
+    public void saveToFile()
     {
         try
         {
