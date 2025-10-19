@@ -66,8 +66,8 @@ class run {
 
             case 2: {
                 System.out.println("welcome employee");
-                    ProductDatabase P = new ProductDatabase("D:\\programming\\java\\lab4\\Products.txt");
-                    CustomerProductDatabase C = new CustomerProductDatabase("D:\\programming\\java\\lab4\\CustomersProducts.txt");
+                    ProductDatabase P = new ProductDatabase("Products.txt");
+                    CustomerProductDatabase C = new CustomerProductDatabase("CustomersProducts.txt");
                     employee_role E = new employee_role(P,C);
 
                 while (true) {

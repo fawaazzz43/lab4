@@ -7,7 +7,7 @@ public class Adminrole {
       try
       {
           //this.database = new EmployeeUserDatabase("Employee.txt");
-          this.database = new EmployeeUserDatabase("D:\\programming\\java\\lab4\\Employee.txt");
+          this.database = new EmployeeUserDatabase("Employee.txt");
           this.database.readFromFile();
       }
       catch (Exception e)
