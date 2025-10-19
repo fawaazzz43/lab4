@@ -3,6 +3,7 @@
 import java.io.IOException;
 import static java.lang.System.exit;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 public class employee_role
@@ -10,20 +11,22 @@ public class employee_role
     private ProductDatabase PD ;
     private CustomerProductDatabase CPD ;
 
-    public employee_role(ProductDatabase PD,CustomerProductDatabase CPD)
-    {
+    public employee_role(ProductDatabase PD,CustomerProductDatabase CPD) throws IOException {
         this.PD = PD ;
-        try {
-            this.PD.readFromFile();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
         this.CPD = CPD ;
+        try
+        {
+            this.PD.readFromFile();
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
         this.CPD.readFromFile();
     }
-    public void add_product (String product_id, String product_name, String manufacturer_name, String supplier_name, int quantity, Double price )
+    public void add_product (String product_id, String product_name, String manufacturer_name, String supplier_name, int quantity)
     {
+        final double price = 1000 ;
         String line = product_id + "," + product_name + "," + manufacturer_name + "," + supplier_name + "," + quantity + "," + price ;
 
         Product p ;
@@ -43,11 +46,15 @@ public class employee_role
 
     public boolean purchaseProduct(String customer_ssn, String product_id, LocalDate purchase_date)
     {
-        String line = customer_ssn + "," + product_id + "," + purchase_date ;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String formattedDate = purchase_date.format(formatter);
+
+        String line = customer_ssn + "," + product_id + "," + formattedDate + "," + "false" ;
+
         CustomerProduct u ;
         u = CPD.createRecordFrom(line) ;
 
-        Product p =  null ;
+        Product p = PD.getRecord(product_id) ;
 
 
         if ( p.getQuantity(product_id) == 0 )
@@ -59,6 +66,7 @@ public class employee_role
             CPD.insertRecord(u) ;
             p.setQuantity( p.getQuantity(product_id)-1 );
             PD.saveToFile();
+            CPD.saveToFile();
             return true;
         }
     }
@@ -85,12 +93,13 @@ public class employee_role
               }
               else
               {
-                  Product p = null ;
+                  Product p = PD.getRecord(product_id) ;
                   p.setQuantity( p.getQuantity(product_id)+1 );
 
-                  PD.deleteRecord(product_id) ;
+                  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                  String formattedPurchaseDate = purchase_date.format(formatter);
 
-                  PD.saveToFile();
+                  CPD.deleteRecord(customer_ssn + "," + product_id + "," + formattedPurchaseDate) ;
 
                   return p.getPrice() ;
               }
@@ -102,7 +111,7 @@ public class employee_role
         int flag = 0 ;
         for ( CustomerProduct i : CPD.returnAllRecords() )
         {
-            if (purchase_date.isEqual(i.getPurchaseDate()))
+            if ( purchase_date.isEqual(i.getPurchaseDate()) && customer_ssn.equals(i.getCustomerSSN()) )
             {
                 if ( !i.isPaid() )
                 {

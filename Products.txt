@@ -1,12 +1,13 @@
-P2394,Laptop,Apple,TechSupplier,10,1500.0
+P2394,Laptop,Apple,TechSupplier,9,1500.0
 P2395,Smartphone,Samsung,MobileWorld,25,900.0
 P2396,Tablet,Lenovo,TechSupplier,15,750.0
 P2397,Headphones,Sony,SoundPro,40,120.0
 P2398,Smartwatch,Apple,TimeZone,20,500.0
 P2399,Monitor,Dell,DisplayTech,8,1100.0
-P2400,Keyboard,Logitech,TechSupplier,30,70.0
+P2400,Keyboard,Logitech,TechSupplier,29,70.0
 P2401,Mouse,HP,TechStore,50,40.0
 P2402,Printer,Canon,OfficeWorld,12,600.0
 P2403,External Hard Drive,Seagate,DataHub,18,350.0
 P2404,Router,TP-Link,NetConnect,22,250.0
-P2405,Webcam,Logitech,TechSupplier,16,180.0
+P2405,Webcam,Logitech,TechSupplier,18,180.0
+

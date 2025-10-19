@@ -1,9 +1,9 @@
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
 class run {
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws IOException {
         Scanner scan = new Scanner(System.in);
 
         System.out.println("who are you?");
@@ -66,9 +66,9 @@ class run {
 
             case 2: {
                 System.out.println("welcome employee");
-                    ProductDatabase P = new ProductDatabase("Products.txt");
-                    CustomerProductDatabase C = new CustomerProductDatabase("CustomersProducts.txt");
-                    employee_role E = new employee_role(P, C);
+                    ProductDatabase P = new ProductDatabase("D:\\programming\\java\\lab4\\Products.txt");
+                    CustomerProductDatabase C = new CustomerProductDatabase("D:\\programming\\java\\lab4\\CustomersProducts.txt");
+                    employee_role E = new employee_role(P,C);
 
                 while (true) {
                     
@@ -97,11 +97,8 @@ class run {
                             System.out.println("Enter product quantity");
                             Integer quantity = scan.nextInt();
                             scan.nextLine();
-                            System.out.println("Enter product price");
-                            Double price = scan.nextDouble();
-                            scan.nextLine();
 
-                            E.add_product(id, name, manufacturer, supplier, quantity, price);
+                            E.add_product(id, name, manufacturer, supplier, quantity);
                             break;
                         }
                         case 2: {
@@ -123,7 +120,6 @@ class run {
                             String ssn = scan.nextLine();
                             System.out.println("Enter product ID");
                             String id = scan.nextLine();
-                            scan.nextLine();
                             LocalDate d_t = LocalDate.now();
 
                             E.purchaseProduct(ssn, id, d_t);

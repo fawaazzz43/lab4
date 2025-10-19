@@ -48,6 +48,8 @@ public class CustomerProductDatabase {
         }
     }
 
+    // CustomerProductDatabase.java
+
     public CustomerProduct createRecordFrom(String line) {
         try {
             String[] parts = line.split(",");
@@ -65,13 +67,14 @@ public class CustomerProductDatabase {
 
             boolean paid = Boolean.parseBoolean(paidStr);
 
+
             CustomerProduct record = new CustomerProduct(ssn, productID, date);
             record.setPaid(paid);
 
             return record;
 
         } catch (Exception e) {
-            System.out.println("Error in line: " + line);
+            System.out.println("Error in line: " + line); //
             return null;
         }
     }
