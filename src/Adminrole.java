@@ -1,11 +1,12 @@
+import static java.lang.System.exit;
 public class Adminrole {
     private EmployeeUserDatabase database;
 
-  public Adminrole(String filename)
+  public Adminrole()
   {
       try
       {
-          this.database = new EmployeeUserDatabase(filename);
+          this.database = new EmployeeUserDatabase("Employee.txt");
           this.database.readFromFile();
       }
       catch (Exception e)
@@ -59,6 +60,7 @@ public class Adminrole {
         {
             System.out.println("error saving file");
         }
+        exit(0);
 
     }
 

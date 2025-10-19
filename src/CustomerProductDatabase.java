@@ -100,7 +100,7 @@ public class CustomerProductDatabase {
         if (!contains(record.getSearchKey())) {
             records.add(record);
         }
-        saveToFile();
+        
     }
 
     public void deleteRecord(String key) {
@@ -117,7 +117,7 @@ public class CustomerProductDatabase {
         {
             records.remove(toRemove);
         }
-        saveToFile();
+        
     }
 
     public void saveToFile() {

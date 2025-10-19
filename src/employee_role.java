@@ -1,10 +1,9 @@
 
 
 import java.io.IOException;
+import static java.lang.System.exit;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-
-import static java.lang.System.exit;
 
 public class employee_role
 {
@@ -14,7 +13,14 @@ public class employee_role
     public employee_role(ProductDatabase PD,CustomerProductDatabase CPD)
     {
         this.PD = PD ;
+        try {
+            this.PD.readFromFile();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         this.CPD = CPD ;
+        this.CPD.readFromFile();
     }
     public void add_product (String product_id, String product_name, String manufacturer_name, String supplier_name, int quantity, Double price )
     {
@@ -122,6 +128,7 @@ public class employee_role
         CPD.saveToFile();
         PD.saveToFile();
 
-        exit(0);
+       System.out.println("employee logged out and data saved.");
+       exit(0);
     }
 }

@@ -1,4 +1,7 @@
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -19,15 +22,23 @@ public class EmployeeUserDatabase {
             System.out.println("File not found!");
             return;
         }
-        Scanner input = new Scanner(file);
-        while (input.hasNextLine()) {
-            String line = input.nextLine();
-            EmployeeUser employee = createRecordFrom(line);
-            if (employee != null) {
-                records.add(employee);
+        try
+        {
+            FileReader fr = new FileReader(file);
+            BufferedReader br = new BufferedReader(fr);
+            String line = br.readLine();
+            records.clear();
+            while (line != null) {
+                records.add(createRecordFrom(line));
+                line = br.readLine();
             }
+            br.close();
         }
-        input.close();
+        catch (FileNotFoundException e)
+        {
+            System.out.println("File not found!");
+        }
+
     }
     public ArrayList<EmployeeUser> returnAllRecords()
     {
@@ -48,7 +59,6 @@ public class EmployeeUserDatabase {
         
         for(int i=0;i<records.size();i++)
         {
-            records.get(i);
             if(records.get(i).getSearchKey().equals(key))
             {
                 return true;
@@ -57,7 +67,7 @@ public class EmployeeUserDatabase {
         return false;
     }
 
-    public String getRecord(String key)
+    public EmployeeUser getRecord(String key)
     {
         EmployeeUser employee;
         for(int i=0;i<records.size();i++)
@@ -65,8 +75,7 @@ public class EmployeeUserDatabase {
             
             if(records.get(i).getSearchKey().equals(key))
             {
-                String line=records.get(i).lineRepresentation();
-                return line;
+                return records.get(i);
             }
         }
         return null;
@@ -74,14 +83,13 @@ public class EmployeeUserDatabase {
     }
     public void insertRecord(EmployeeUser record)
     {
-       this.records.add(record);
-        try
+       if(contains(record.getSearchKey())==false)
         {
-            saveToFile();
+            this.records.add(record);
         }
-        catch (Exception e)
+        else
         {
-            throw new RuntimeException(e);
+            System.out.println("employee ID must be unique");
         }
     }
     public void deleteRecord(String key)
@@ -91,33 +99,23 @@ public class EmployeeUserDatabase {
         {
             if(records.get(i).getSearchKey().equals(key))
             {
-                records.remove(i);
+                records.remove(records.get(i));
                 flag = 1 ;
+                return;
             }
         }
         if (flag == 0)
         {
             System.out.println("Record not found.");
         }
-        else
-        {
-            try {
-                saveToFile();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
     }
     public void saveToFile() throws Exception
     {
-        FileWriter file = new FileWriter(filename,false);
+        FileWriter file = new FileWriter(filename);
         for(int i=0;i<records.size();i++)
         {
             file.write(records.get(i).lineRepresentation()+"\n");
         }
         file.close();
-    }
-    public String getFilename() {
-        return this.filename;
     }
 }

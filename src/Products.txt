@@ -1,1 +1,0 @@
-P222,laptop,aorus,gamma,100,675.0

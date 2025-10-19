@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 
 public class ProductDatabase  {
@@ -14,7 +13,7 @@ public class ProductDatabase  {
         records=new ArrayList();
     }
 
-    public void readFromFile()
+    public void readFromFile() throws IOException
     {
         File file = new File(filename);
         if (!file.exists()) {
@@ -23,13 +22,15 @@ public class ProductDatabase  {
         }
         try
         {
-            Scanner input = new Scanner(file);
-            while (input.hasNextLine()) {
-                String line = input.nextLine();
-                Product p = createRecordFrom(line);
-                if (p != null) records.add(p);
+            FileReader fr = new FileReader(file);
+            BufferedReader br = new BufferedReader(fr);
+            String line = br.readLine();
+            records.clear();
+            while (line != null) {
+                records.add(createRecordFrom(line));
+                line = br.readLine();
             }
-            input.close();
+            br.close();
         }
         catch (FileNotFoundException e)
         {
@@ -41,7 +42,10 @@ public class ProductDatabase  {
     public Product createRecordFrom(String line)
     {
         String [] linesplit = line.split(",");
-        return new Product(linesplit[0],linesplit[1],linesplit[2],linesplit[3],Integer.parseInt(linesplit[4]),Float.parseFloat(linesplit[5]));
+        if(linesplit.length==6)
+            return new Product(linesplit[0],linesplit[1],linesplit[2],linesplit[3],Integer.parseInt(linesplit[4]),Float.parseFloat(linesplit[5]));
+        else 
+        return null;
     }
 
     public ArrayList<Product> returnAllRecords()
@@ -70,7 +74,6 @@ public class ProductDatabase  {
         if(contains(record.getSearchKey())==false)
         {
             this.records.add(record);
-            saveToFile();
         }
         else
         {
@@ -84,9 +87,12 @@ public class ProductDatabase  {
         for( i = 0 ; i < records.size() ; i++ )
         {
             if(key.equals(records.get(i).getSearchKey()))
-                records.remove(records.get(i));
-                saveToFile();
+                {records.remove(records.get(i));
+                    return;}
         }
+        if(i==records.size())
+            System.out.println("Record not found.");
+
     }
 
     public void saveToFile()
@@ -97,6 +103,7 @@ public class ProductDatabase  {
             for(int i=0;i<records.size();i++)
                 fr.write(records.get(i).lineRepresentation()+"\n");
 
+            System.out.println("Data saved to file successfully.");
             fr.close();
         }
         catch(IOException e)

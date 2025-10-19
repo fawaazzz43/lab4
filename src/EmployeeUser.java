@@ -17,8 +17,7 @@ public class EmployeeUser {
 
     public String lineRepresentation()
     {
-       String EmployeeData = String.join(",", employeeId, name, email, address, phoneNumber);
-       return EmployeeData;
+       return employeeId+","+name+","+email+","+address+","+phoneNumber;
     }
 
     public String getSearchKey() {
