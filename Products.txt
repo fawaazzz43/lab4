@@ -10,4 +10,4 @@ P2402,Printer,Canon,OfficeWorld,12,600.0
 P2403,External Hard Drive,Seagate,DataHub,18,350.0
 P2404,Router,TP-Link,NetConnect,22,250.0
 P2405,Webcam,Logitech,TechSupplier,18,180.0
-
+P2406,bhphyb,rrtbt,rffe,50,1000.0

@@ -11,7 +11,7 @@ public class employee_role
     private ProductDatabase PD ;
     private CustomerProductDatabase CPD ;
 
-    public employee_role(ProductDatabase PD,CustomerProductDatabase CPD) throws IOException {
+    public employee_role(ProductDatabase PD,CustomerProductDatabase CPD) throws Exception {
         this.PD = PD ;
         this.CPD = CPD ;
         try
@@ -106,7 +106,7 @@ public class employee_role
           }
     }
 
-    public boolean apply_payment(String customer_ssn , LocalDate purchase_date)
+    public boolean apply_payment(String customer_ssn , LocalDate purchase_date) throws Exception
     {
         int flag = 0 ;
         for ( CustomerProduct i : CPD.returnAllRecords() )
@@ -132,7 +132,7 @@ public class employee_role
         }
     }
 
-    public void logout ()
+    public void logout () throws Exception
     {
         CPD.saveToFile();
         PD.saveToFile();

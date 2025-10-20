@@ -17,7 +17,7 @@ public class Adminrole {
 }
 
 
-    public void addEmployee(String employeeId, String name, String email, String address, String phoneNumber)
+    public void addEmployee(String employeeId, String name, String email, String address, String phoneNumber) throws Exception
     {
        if(database.contains(employeeId))
        {
@@ -29,9 +29,10 @@ public class Adminrole {
         this.database.insertRecord(newEmployee);
         System.out.println("New employee added.");
         
+        
     }
 
-    public void removeEmployee(String employeeId)
+    public void removeEmployee(String employeeId) throws Exception
     {
         if (!database.contains(employeeId)) {
             System.out.println("Employee with this ID does not exist.");
@@ -39,6 +40,7 @@ public class Adminrole {
         }
         database.deleteRecord(employeeId);
         System.out.println("Employee with ID " + employeeId + " has been removed.");
+        
         
     }
     public EmployeeUser[] getListOfEmployees()

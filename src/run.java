@@ -1,9 +1,8 @@
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
 class run {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         Scanner scan = new Scanner(System.in);
 
         System.out.println("who are you?");
@@ -41,6 +40,7 @@ class run {
                             String phoneNumber = scan.nextLine();
 
                             A.addEmployee(id, name, email, address, phoneNumber);
+                            
                             break;
                         }
                         case 2: {

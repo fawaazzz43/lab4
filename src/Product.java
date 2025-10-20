@@ -1,4 +1,4 @@
-public class Product{
+public class Product extends Record{
     private String productID;
     private String productName;
     private String manufacturerName;
@@ -31,11 +31,13 @@ public class Product{
         return price;
     }
 
+    @Override
     public String lineRepresentation()
     {
         return productID +","+ productName +","+ manufacturerName +","+ supplierName +","+ String.valueOf(quantity) +","+ String.valueOf(price);
     }
 
+    @Override
     public String getSearchKey()
     {
         return productID;
