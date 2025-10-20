@@ -11,3 +11,4 @@ P2403,External Hard Drive,Seagate,DataHub,18,350.0
 P2404,Router,TP-Link,NetConnect,22,250.0
 P2405,Webcam,Logitech,TechSupplier,18,180.0
 P2406,bhphyb,rrtbt,rffe,50,1000.0
+P2407,laptop,aorus,gamma,100,1000.0

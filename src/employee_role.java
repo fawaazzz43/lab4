@@ -65,8 +65,6 @@ public class employee_role
         {
             CPD.insertRecord(u) ;
             p.setQuantity( p.getQuantity(product_id)-1 );
-            PD.saveToFile();
-            CPD.saveToFile();
             return true;
         }
     }

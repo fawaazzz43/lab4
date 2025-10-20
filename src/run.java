@@ -22,6 +22,7 @@ class run {
                     System.out.println("1.add employee");
                     System.out.println("2.remove employee");
                     System.out.println("3.logout");
+                    System.out.println("if you want to save the changes , logout");
 
                     Integer i = scan.nextInt();
                     scan.nextLine();
@@ -66,8 +67,8 @@ class run {
 
             case 2: {
                 System.out.println("welcome employee");
-                    ProductDatabase P = new ProductDatabase("Products.txt");
-                    CustomerProductDatabase C = new CustomerProductDatabase("CustomersProducts.txt");
+                    ProductDatabase P = new ProductDatabase("D:\\programming\\java\\lab4\\Products.txt");
+                    CustomerProductDatabase C = new CustomerProductDatabase("D:\\programming\\java\\lab4\\CustomersProducts.txt");
                     employee_role E = new employee_role(P,C);
 
                 while (true) {
@@ -80,6 +81,7 @@ class run {
                     System.out.println("5.return product");
                     System.out.println("6.apply payment");
                     System.out.println("7.logout");
+                    System.out.println("if you want to save the changes , logout");
 
                     Integer J = scan.nextInt();
                     scan.nextLine();
